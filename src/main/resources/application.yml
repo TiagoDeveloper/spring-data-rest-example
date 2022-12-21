@@ -1,0 +1,51 @@
+spring:
+  profiles:
+    default: "dev"
+    
+    
+server:
+  port: 8084
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        exclude: configprops, env
+        
+  endpoint:
+    health: 
+      show-details: always
+  health:
+    defaults:
+      enabled: true
+    db:
+      enabled: true
+---
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+  datasource:
+    url: ${RDS_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${RDS_USERNAME:postgres}
+    password: ${RDS_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: "test"
+#  datasource:
+#    url: jdbc:postgresql://localhost:5436/postgres
+#    username: postgres
+#    password: postgres
+#    driver-class-name: org.postgresql.Driver
+#  jpa:
+#    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    
+
+
+
+
+
